@@ -1,0 +1,19 @@
+.productImageCard {
+  position: relative;
+  overflow: hidden;
+
+
+  .productImageActionContainer {
+    transition: transform 0.5s ease;
+
+    @media screen and (min-width: 660px) {
+      transform: translateY(-110%);
+    }
+  }
+
+  &:hover {
+    .productImageActionContainer {
+      transform: translateY(0);
+    }
+  }
+}
