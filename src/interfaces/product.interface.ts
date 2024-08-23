@@ -28,6 +28,7 @@ export interface ProductObject {
   specificationGroupId?: string;
   specificationGroup?: SpecificationGroupObject;
   specifications: ProductSpecificationObject[];
+  primaryImage: ProductImageObject;
 }
 
 export interface CreateProductInput {
@@ -99,3 +100,4 @@ export interface ProductSpecificationsFormProps {
   onSubmit: (inputs: ProductSpecificationInput[]) => void;
   disabled?: boolean;
 }
+

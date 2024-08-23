@@ -2,14 +2,13 @@ import { ProductImageObject, ProductObject } from "@/interfaces";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { marketplacesApi, Storage } from "@/utils";
-import { UploadProductImageForm } from "../Forms/Product";
+// import { UploadProductImageForm } from "../Forms/Product";
 import { Loader } from "../Loader/Loader";
 import { Section } from "../Section";
 import { MdDelete, MdStar, MdStarOutline } from "react-icons/md";
 import styles from "./ProductImages.module.scss";
 import { toast } from "react-toastify";
-import { ActionConfirmationDialogue } from "../ActionConfirmationDialogue";
-import { GalleryCarousel } from "../GalleryCarousel";
+// import { GalleryCarousel } from "../GalleryCarousel";
 
 export interface ProductImagesProps {
   product: ProductObject;
@@ -99,10 +98,10 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
             {images.length ? (
               <div>
                 <Section>
-                  <UploadProductImageForm
+                  {/* <UploadProductImageForm
                     product={product}
                     onSubmit={handleOnProductImagesUpload}
-                  />
+                  /> */}
                 </Section>
                 <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
                   {images.map((image, i) => (
@@ -161,44 +160,15 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
                   There are no images for his product.
                 </p>
 
-                <UploadProductImageForm
+                {/* <UploadProductImageForm
                   product={product}
                   onSubmit={handleOnProductImagesUpload}
-                />
+                /> */}
               </div>
             )}
           </div>
         )}
       </Section>
-
-      <ActionConfirmationDialogue
-        message={`You are about to delete a product image. Proceed?`}
-        isOpen={showDeleteDialogue}
-        onConfirm={deleteProductImage}
-        onClose={setShowDeleteDialogue}
-        confirmationButtonVariant="danger"
-        loading={deleting}
-      />
-
-      <GalleryCarousel
-        startIndex={selectedIndex}
-        onClose={() => setSelectedIndex(null)}
-      >
-        {images.map((image, i) => (
-          <li
-            key={`${product.slug}-image-${i}`}
-            className={`h-36 sm:h-40 md:h-48 lg:h-96`}
-          >
-            <Image
-              src={Storage.get(image.key)}
-              alt={`${product.slug}-image-${i}`}
-              fill={true}
-              className="w-12 pointer"
-              objectFit="cover"
-            />
-          </li>
-        ))}
-      </GalleryCarousel>
     </div>
   );
 };
