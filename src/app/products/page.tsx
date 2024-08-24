@@ -128,13 +128,13 @@ export default function ProductsPage() {
                   <hr />
 
                   <div>
-                    <h4 className="text-sm mb-4">Specifications</h4>
+                    <h4 className="text-md mb-4">Specifications</h4>
                     <ul className="flex flex-col gap-8">
                       <li className="grid gap-1">
                         <h4 className="font-semibold text-sm">Weight (kg)</h4>
                         <ul>
                           <li>
-                            <Checkbox
+                            <Radio
                               options={[
                                 {
                                   name: `Less than ${Numerics.format(1000, {
@@ -152,7 +152,7 @@ export default function ProductsPage() {
                         <h4 className="font-semibold text-sm">Size (kg)</h4>
                         <ul>
                           <li>
-                            <Checkbox
+                            <Radio
                               options={[
                                 {
                                   name: `Less than ${Numerics.format(1000, {
@@ -165,35 +165,11 @@ export default function ProductsPage() {
                           </li>
                         </ul>
                       </li>
-
-                      <li className="grid gap-1">
-                        <h4 className="font-semibold text-sm">Brand</h4>
-                        <ul>
-                          <li>
-                            <Checkbox
-                              options={[
-                                {
-                                  name: "Hisense",
-                                  value: "hisense-id",
-                                },
-                                {
-                                  name: "LG",
-                                  value: "lg-id",
-                                },
-                                {
-                                  name: "Samsung",
-                                  value: "samsung-id",
-                                },
-                              ]}
-                            />
-                          </li>
-                        </ul>
-                      </li>
                     </ul>
                   </div>
                 </div>
 
-                <div>
+                <div className="w-full">
                   <ProductListing params={productListingSearchParams} />
                 </div>
               </div>
