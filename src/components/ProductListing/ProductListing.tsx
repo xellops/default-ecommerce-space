@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { Product } from "../Product/Product";
+import { ProductListingProps } from "@/interfaces/product-listing.interface";
+import { Section } from "../Section";
 
-export const ProductListing = () => {
+export const ProductListing = (props: ProductListingProps) => {
   const [products, setProducts] = useState<any[]>([]);
 
   const getData = async () => {
+    setTimeout(() => {}, 3000);
     const data = [
       {
         name: "Product A",
@@ -16,7 +19,7 @@ export const ProductListing = () => {
         },
       },
       {
-        name: "Product B",
+        name: "Product Bsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
         slug: "product-b",
         price: 30,
         primaryImage: {
@@ -61,12 +64,16 @@ export const ProductListing = () => {
   }, []);
 
   return (
-    <ul className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {products.map((product, i) => (
-        <li>
-          <Product {...product} />
-        </li>
-      ))}
-    </ul>
+    <div>
+      <Section>
+        <ul className="grid gap-4 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {products.map((product, i) => (
+            <li key={`product-list-item-${Date.now()}-${i}`}>
+              <Product {...product} />
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </div>
   );
 };

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Numerics } from "@/utils";
+import { Numerics, Text } from "@/utils";
 import { Button } from "../Button";
 import { BiCart, BiCartAdd } from "react-icons/bi";
 import { IconContainer } from "../IconContainer/IconContainer";
@@ -37,20 +37,21 @@ export const Product = (props: ProductObject) => {
   }, []);
 
   return (
-    <div className="rounded-lg max-w-72 grid gap-1 row-span-2 overflow-hidden">
-      <Link href={props.slug}>
-        <div className="overflow-hidden h-32 sm:h-40 md:h-48 flex">
-          <img
-            src={props.primaryImage.key}
-            className="object-cover object-center w-full"
-          />
-        </div>
-      </Link>
+    <div className="rounded-lg borders h-60 md:h-72 flex justify-between flex-col gap-1 row-span-2 overflow-hidden">
       <div className="grid gap-1 text-sm">
-        <div className="flex justify-between items-center">
+        <Link href={props.slug}>
+          <div className="overflow-hidden h-32 sm:h-40 md:h-44 flex">
+            <img
+              src={props.primaryImage.key}
+              className="object-cover object-center w-full"
+            />
+          </div>
+        </Link>
+        <div className="flex justify-between items-start">
           <Link href={props.slug}>
-            <h3>{props.name}</h3>
+            <h3 className="font-medium">{Text.truncate(props.name, 24)}</h3>
           </Link>
+
           <IconContainer
             className="cursor-pointer"
             onClick={handleCartButtonClick}
@@ -59,10 +60,9 @@ export const Product = (props: ProductObject) => {
           </IconContainer>
         </div>
         <p>{Numerics.format(props.price, { symbol: "NGN" })}</p>
-
-        <div>
-          <Button className="w-full md:w-fit">Buy now</Button>
-        </div>
+      </div>
+      <div>
+        <Button className="w-full md:w-fit">Buy now</Button>
       </div>
     </div>
   );
