@@ -83,7 +83,7 @@ export const ProductListing = (props: ProductListingProps) => {
 
   if (loading) {
     return (
-      <div className="relative mt-8">
+      <div className="relative h-16">
         <Loader size="sm" />
       </div>
     );
