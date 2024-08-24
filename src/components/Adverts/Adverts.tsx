@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "../Container";
+import { WhiteCardContainer } from "../Cards";
 
 export const Adverts = () => {
   const [adverts, setAdverts] = useState<any[]>([]);
@@ -19,13 +20,18 @@ export const Adverts = () => {
 
   return (
     <Container>
-      <ul>
-        {adverts.map((ad, i) => (
-          <li className="bg-blue-500 overflow-hidden rounded-xl h-48 md:h-80">
-            <img src={ad.src} className="object-bottom object-contain w-full" />
-          </li>
-        ))}
-      </ul>
+      <WhiteCardContainer>
+        <ul>
+          {adverts.map((ad, i) => (
+            <li className="bg-blue-500 overflow-hidden rounded-xl h-48 md:h-80">
+              <img
+                src={ad.src}
+                className="object-bottom object-contain w-full"
+              />
+            </li>
+          ))}
+        </ul>
+      </WhiteCardContainer>
     </Container>
   );
 };

@@ -6,7 +6,7 @@ interface ButtonProp extends ButtonHTMLAttributes<any> {
 
 const btnVariantStylings = {
   default: "bg-black text-white",
-  secondary: "bg-transparent border border-blue-600 text-blue-600",
+  secondary: "bg-transparent border border-black text-black",
   danger: "bg-red-600 text-white",
   grey: "bg-stone-500 text-white",
   light: "bg-white text-black",
@@ -20,7 +20,7 @@ export const Button = (props: ButtonProp) => {
   return (
     <button
       {...props}
-      className={`p-2 text-sm rounded-lg font-medium disabled:opacity-75 ${btnVariantStyling} ${props.className}`}
+      className={`p-2 drop-shadow-md text-sm rounded-md font-medium disabled:opacity-75 ${btnVariantStyling} ${props.className}`}
     >
       {props.children}
     </button>

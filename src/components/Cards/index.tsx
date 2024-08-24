@@ -8,7 +8,7 @@ export const CardContainer = (props: CardContainerProps) => {
   return (
     <div
       {...props}
-      className={`drop-shadow-sm border rounded-2xl overflow-hidden p-4 md:p-6 ${props.className}`}
+      className={`drop-shadow-sm border rounded-md overflow-hidden p-2 md:p-4 ${props.className}`}
     >
       {props.children}
     </div>

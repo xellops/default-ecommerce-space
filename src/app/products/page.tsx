@@ -1,4 +1,5 @@
 "use client";
+import { WhiteCardContainer } from "@/components/Cards";
 import { Container } from "@/components/Container";
 import { Checkbox, Radio } from "@/components/Form";
 import { Header } from "@/components/Header";
@@ -46,7 +47,7 @@ export default function ProductsPage() {
               </div> */}
 
               <div className="md:flex items-start gap-4">
-                <div className="w-full max-w-48 pr-2 h-screen border-r flex flex-col gap-8">
+                <WhiteCardContainer className="w-full md:max-w-72 h-screen flex flex-col gap-4">
                   <div className="flex items-center gap-0.5 font-semibold mb-0">
                     <IconContainer>
                       <GoFilter />
@@ -54,7 +55,7 @@ export default function ProductsPage() {
                     <span className="text-sm">Filters</span>
                   </div>
 
-                  <ul className="flex flex-col gap-8">
+                  <ul className="flex flex-col gap-4">
                     <li className="grid gap-1">
                       <h4 className="font-semibold text-sm">Price (NGN)</h4>
                       <ul>
@@ -167,11 +168,14 @@ export default function ProductsPage() {
                       </li>
                     </ul>
                   </div>
-                </div>
+                </WhiteCardContainer>
 
-                <div className="w-full">
-                  <ProductListing params={productListingSearchParams} />
-                </div>
+                <WhiteCardContainer className="w-full min-h-screen bg-white p-4">
+                  <ProductListing
+                    params={productListingSearchParams}
+                    showNumHits
+                  />
+                </WhiteCardContainer>
               </div>
             </Container>
           </Section>

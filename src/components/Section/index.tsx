@@ -6,7 +6,7 @@ export const Section = ({
   ...otherProps
 }: HTMLAttributes<any>) => {
   return (
-    <section {...otherProps} className={`mb-6 last:mb-0 ${className}`}>
+    <section {...otherProps} className={`mb-4 last:mb-0 ${className}`}>
       {children}
     </section>
   );

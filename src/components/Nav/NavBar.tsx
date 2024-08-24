@@ -24,7 +24,7 @@ export const NavBar = () => {
   }, []);
 
   return (
-    <div className="py-4 shadow-sm shadow-gray-200 drop-shadow-sm sticky top-0">
+    <div className="py-4 shadow-sm bg-white shadow-gray-200 drop-shadow-sm sticky top-0">
       <Container>
         <div className="flex items-center justify-between gap-4 md:gap-12">
           <Link href={"/"} className="logo font-medium">

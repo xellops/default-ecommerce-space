@@ -8,6 +8,7 @@ export const ProductListing = (props: ProductListingProps) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [products, setProducts] = useState<any[]>([]);
+  const [hits, setHits] = useState<number>(0);
 
   const getData = async () => {
     setErrorMessage("");
@@ -68,6 +69,7 @@ export const ProductListing = (props: ProductListingProps) => {
         }, 3000);
       });
       setProducts(res);
+      setHits(res.length);
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {
@@ -79,21 +81,39 @@ export const ProductListing = (props: ProductListingProps) => {
     getData();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="relative mt-8">
+        <Loader size="sm" />
+      </div>
+    );
+  }
+
   return (
-    <div className="relative">
-      {loading ? (
-        <div className="relative mt-8">
-          <Loader size="sm" />
+    <>
+      {hits ? (
+        <div className="grid gap-2">
+          <div className="text-md flex items-center gap-2 mb-2">
+            <p>{props.params?.q || null}</p>
+            <p className="text-stone-600">
+              {props.showNumHits ? `(${hits} items found)` : null}
+            </p>
+          </div>
+          <ul className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {products.map((product, i) => (
+              <li key={`product-list-item-${Date.now()}-${i}`}>
+                <Product {...product} />
+              </li>
+            ))}
+          </ul>
         </div>
       ) : (
-        <ul className="grid gap-4 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product, i) => (
-            <li key={`product-list-item-${Date.now()}-${i}`}>
-              <Product {...product} />
-            </li>
-          ))}
-        </ul>
+        <div>
+          <p>
+            No results were found. Try modifying your search or the filters.
+          </p>
+        </div>
       )}
-    </div>
+    </>
   );
 };

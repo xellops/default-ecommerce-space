@@ -1,5 +1,6 @@
 "use client";
 import { Adverts } from "@/components/Adverts/Adverts";
+import { WhiteCardContainer } from "@/components/Cards";
 import { Container } from "@/components/Container";
 import { Header } from "@/components/Header";
 import { ProductListing } from "@/components/ProductListing/ProductListing";
@@ -21,15 +22,19 @@ export default function HomePage() {
 
           <Section>
             <Container>
-              <h2 className="text-xl font-semibold">Top sales</h2>
-              <ProductListing />
+              <WhiteCardContainer>
+                <h2 className="text-xl font-semibold">Top sales</h2>
+                <ProductListing params={{}} />
+              </WhiteCardContainer>
             </Container>
           </Section>
 
           <Section>
             <Container>
-              <h2 className="text-xl font-semibold">Electronics</h2>
-              <ProductListing />
+              <WhiteCardContainer>
+                <h2 className="text-xl font-semibold">Electronics</h2>
+                <ProductListing params={{}} />
+              </WhiteCardContainer>
             </Container>
           </Section>
         </div>
