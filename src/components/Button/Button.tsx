@@ -20,7 +20,7 @@ export const Button = (props: ButtonProp) => {
   return (
     <button
       {...props}
-      className={`p-2 drop-shadow-md text-sm rounded-md font-medium disabled:opacity-75 ${btnVariantStyling} ${props.className}`}
+      className={`p-2 transition-all duration-200 hover:scale-95 shadow-xl text-sm rounded-md font-medium disabled:opacity-75 ${btnVariantStyling} ${props.className}`}
     >
       {props.children}
     </button>

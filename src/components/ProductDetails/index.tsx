@@ -1,16 +1,11 @@
 "use client";
 import { Section } from "../Section";
-import Link from "next/link";
-import { Button } from "../Button";
 import { useEffect, useState } from "react";
 import { ProductObject } from "@/interfaces";
-import { marketplacesApi } from "@/utils";
 import { useParams } from "next/navigation";
 import { Loader } from "../Loader/Loader";
-import { BasicProductInformation } from "./BasicProductInformation";
 import { ProductSummary } from "./ProductSummary";
-import { ProductImages } from "./ProductImages";
-import { ProductSpecifications } from "./ProductSpecifications";
+import { WhiteCardContainer } from "../Cards";
 
 export const ProductDetails = () => {
   const params = useParams();
@@ -21,10 +16,17 @@ export const ProductDetails = () => {
   const fetchProduct = async () => {
     setLoading(true);
     try {
-      const result = await marketplacesApi.findProduct(
-        params.productId as string
-      );
-      setProduct(result);
+      // const result = await marketplacesApi.findProduct(
+      //   params.productSlug as string
+      // );
+      // setProduct(result);
+      const res: any = await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({});
+        }, 5000);
+      });
+
+      setProduct(res);
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {
@@ -41,12 +43,29 @@ export const ProductDetails = () => {
   ) : (
     <>
       {product ? (
-        <div>
+        <div className="max-w-4xl mx-auto">
           <Section>
+            <h1 className="text-4xl">{params.productSlug}</h1>
             <ProductSummary product={product!} onUpdate={setProduct} />
           </Section>
 
-          <Section></Section>
+          <Section>
+            <WhiteCardContainer>
+              <p>Some description</p>
+            </WhiteCardContainer>
+          </Section>
+
+          <Section>
+            <WhiteCardContainer>
+              <p>Some description</p>
+            </WhiteCardContainer>
+          </Section>
+
+          <Section>
+            <WhiteCardContainer>
+              <p>Similar products</p>
+            </WhiteCardContainer>
+          </Section>
         </div>
       ) : (
         <p className="text-center font-semibold text-xl">Product not found</p>

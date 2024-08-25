@@ -6,7 +6,6 @@ import {
   SpecificationObject,
 } from "@/interfaces";
 import { useEffect, useState } from "react";
-import { ProductSpecificationForm } from "../Forms/Product/ProductSpecificationsForm";
 import { toast } from "react-toastify";
 import { marketplacesApi } from "@/utils";
 import { useRouter } from "next/navigation";
@@ -82,12 +81,6 @@ export const ProductSpecifications = (props: ProductSpecificationsProps) => {
       ) : (
         <p>User has to select a specification group.</p>
       )}
-
-      <ProductSpecificationForm
-        productSpecifications={productSpecificationInputWithMeta}
-        onSubmit={(inputs) => handleSubmit(inputs)}
-        disabled={updating}
-      />
     </div>
   );
 };
