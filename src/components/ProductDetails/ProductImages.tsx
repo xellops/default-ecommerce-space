@@ -1,6 +1,6 @@
 import { ProductImageObject, ProductObject } from "@/interfaces";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { marketplacesApi, Storage } from "@/utils";
 // import { UploadProductImageForm } from "../Forms/Product";
 import { Loader } from "../Loader/Loader";
@@ -23,7 +23,7 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
   const [showDeleteDialogue, setShowDeleteDialogue] = useState<boolean>(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const fetchImages = async () => {
+  const fetchImages = useCallback(async () => {
     setLoading(true);
     try {
       const result = await marketplacesApi.findProductImages(product.id);
@@ -36,7 +36,7 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [product.id]);
 
   const setPrimaryImage = async (image: ProductImageObject) => {
     setLoading(true);
@@ -86,7 +86,7 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
 
   useEffect(() => {
     fetchImages();
-  }, []);
+  }, [fetchImages]);
 
   return (
     <div className="max-w-3xld">

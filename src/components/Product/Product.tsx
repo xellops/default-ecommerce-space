@@ -48,6 +48,7 @@ export const Product = (props: ProductObject) => {
         <Link href={props.slug}>
           <img
             src={props.primaryImage.key}
+            alt={props.slug}
             className="object-cover absolute object-center w-full h-full"
           />
         </Link>

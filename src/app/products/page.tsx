@@ -9,7 +9,8 @@ import { ProductSearchParams } from "@/interfaces/product-listing.interface";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
-export default function ProductsPage() {
+
+const SearchResultPage = () => {
   const searchParams = useSearchParams();
   const [productListingSearchParams, setProductListingSearchParams] =
     useState<ProductSearchParams>({});
@@ -21,31 +22,34 @@ export default function ProductsPage() {
   useEffect(() => {
     const q = searchParams.get("q") || "";
     setProductListingSearchParams({ q });
-  }, []);
+  }, [searchParams]);
 
+  return (
+    <>
+      <Section>
+        <Header />
+      </Section>
+
+      <Section>
+        <Container>
+          <div className="md:flex items-start gap-4">
+            <ProductSearchFilters />
+
+            <WhiteCardContainer className="w-full min-h-screen bg-white p-4">
+              <ProductListing params={productListingSearchParams} showNumHits />
+            </WhiteCardContainer>
+          </div>
+        </Container>
+      </Section>
+    </>
+  );
+};
+
+export default function ProductsPage() {
   return (
     <main>
       <Suspense>
-        <div className="grid">
-          <Section>
-            <Header />
-          </Section>
-
-          <Section>
-            <Container>
-              <div className="md:flex items-start gap-4">
-                <ProductSearchFilters />
-
-                <WhiteCardContainer className="w-full min-h-screen bg-white p-4">
-                  <ProductListing
-                    params={productListingSearchParams}
-                    showNumHits
-                  />
-                </WhiteCardContainer>
-              </div>
-            </Container>
-          </Section>
-        </div>
+        <SearchResultPage />
       </Suspense>
     </main>
   );

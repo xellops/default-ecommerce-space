@@ -70,7 +70,7 @@ export const ProductSpecifications = (props: ProductSpecificationsProps) => {
       });
       setProductSpecificationInputWithMeta(inputsWithMetadata);
     });
-  }, []);
+  }, [props]);
 
   return (
     <div className="grid gap-6">

@@ -21,7 +21,7 @@ export const ProductListing = (props: ProductListingProps) => {
           slug: "product-a",
           price: 30,
           primaryImage: {
-            key: "./images/banner-2.png",
+            key: "/images/banner-2.png",
             isPrimary: true,
           },
         },
@@ -30,7 +30,7 @@ export const ProductListing = (props: ProductListingProps) => {
           slug: "product-b",
           price: 30,
           primaryImage: {
-            key: "./images/banner-1.jpg",
+            key: "/images/banner-1.jpg",
             isPrimary: false,
           },
         },
@@ -39,7 +39,7 @@ export const ProductListing = (props: ProductListingProps) => {
           slug: "product-b",
           price: 30,
           primaryImage: {
-            key: "./images/banner-1.jpg",
+            key: "/images/banner-1.jpg",
             isPrimary: false,
           },
         },
@@ -48,7 +48,7 @@ export const ProductListing = (props: ProductListingProps) => {
           slug: "product-b",
           price: 30,
           primaryImage: {
-            key: "./images/banner-1.jpg",
+            key: "/images/banner-1.jpg",
             isPrimary: false,
           },
         },
@@ -57,7 +57,7 @@ export const ProductListing = (props: ProductListingProps) => {
           slug: "product-b",
           price: 30,
           primaryImage: {
-            key: "./images/banner-1.jpg",
+            key: "/images/banner-1.jpg",
             isPrimary: false,
           },
         },
