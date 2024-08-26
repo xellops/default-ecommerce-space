@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { ProductObject } from "@/interfaces";
 import { toast } from "react-toastify";
+import { CartButtonControls } from "../CartButtonControls/CartButtonControls";
 
 export const Product = (props: ProductObject) => {
   const [isInCart, setIsInCart] = useState<boolean>(false);
@@ -67,13 +68,10 @@ export const Product = (props: ProductObject) => {
         </Link>
 
         <div className="grid gap-2">
-          <Button
-            className="w-full uppercase"
-            onClick={handleCartButtonClick}
-            variant={isInCart ? "secondary" : "default"}
-          >
-            {isInCart ? "Remove" : "Add to cart"}
-          </Button>
+          <CartButtonControls
+            productId={props.id}
+            availableUnits={props.availableUnits}
+          />
           {/* <Button className="w-full uppercase">Buy now</Button> */}
         </div>
       </div>

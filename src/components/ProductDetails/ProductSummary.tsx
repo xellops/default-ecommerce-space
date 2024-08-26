@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Button } from "../Button";
 import { MdHelpOutline } from "react-icons/md";
 import { GrShieldSecurity } from "react-icons/gr";
+import { CartButtonControls } from "../CartButtonControls/CartButtonControls";
 
 export interface ProductSummaryProps {
   product: ProductObject;
@@ -92,9 +93,10 @@ export const ProductSummary = ({ product }: ProductSummaryProps) => {
           </Section>
 
           <Section className="grid gap-2">
-            <Button variant="secondary" className="uppercase">
-              Add to cart
-            </Button>
+            <CartButtonControls
+              productId={product.id}
+              availableUnits={product.availableUnits}
+            />
             <Button className="bg-green-600 uppercase">Buy Now</Button>
           </Section>
         </div>
