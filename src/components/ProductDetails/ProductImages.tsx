@@ -41,9 +41,9 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
   const setPrimaryImage = async (image: ProductImageObject) => {
     setLoading(true);
     try {
-      await marketplacesApi.setPrimaryProductImage(image.productId, image.id);
-      toast.success("Primary image updated successfully.");
-      await fetchImages();
+      // await marketplacesApi.setPrimaryProductImage(image.productId, image.id);
+      // toast.success("Primary image updated successfully.");
+      // await fetchImages();
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {
@@ -60,28 +60,6 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
   const handleDeleteButtonClick = (image: ProductImageObject) => {
     setSelected(image);
     setShowDeleteDialogue(true);
-  };
-
-  const deleteProductImage = async () => {
-    if (selected!.isPrimary) {
-      return toast.error(
-        "You can not delete the primary image of a product. You must set another image as primary first."
-      );
-    }
-
-    setDeleting(true);
-    try {
-      await marketplacesApi.deleteProductImage(
-        selected!.productId,
-        selected!.id
-      );
-      await fetchImages();
-      setShowDeleteDialogue(false);
-    } catch (error: any) {
-      setErrorMessage(error.message);
-    } finally {
-      setDeleting(false);
-    }
   };
 
   useEffect(() => {

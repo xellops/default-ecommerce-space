@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Numerics, Text } from "@/utils";
+import { Numerics, Storage, Text } from "@/utils";
 import { Button } from "../Button";
 import { BiCart, BiCartAdd } from "react-icons/bi";
 import { IconContainer } from "../IconContainer/IconContainer";
@@ -44,10 +44,14 @@ export const Product = (props: ProductObject) => {
       }}
       className="bg-white rounded-md h-60 sm:h-72 overflow-hidden hover:shadow-md transition-all"
     >
-      <div className="overflow-hidden relative flex bg-red-200">
+      <div className="overflow-hidden relative flex">
         <Link href={props.slug}>
           <img
-            src={props.primaryImage.key}
+            src={
+              props.images[0]
+                ? Storage.get(props.images[0].key)
+                : "/images/banner-1.jpg"
+            }
             alt={props.slug}
             className="object-cover absolute object-center w-full h-full"
           />

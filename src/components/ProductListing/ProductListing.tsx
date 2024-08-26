@@ -3,6 +3,8 @@ import { Product } from "../Product/Product";
 import { ProductListingProps } from "@/interfaces/product-listing.interface";
 import { Section } from "../Section";
 import { Loader } from "../Loader/Loader";
+import { marketplacesApi } from "@/utils";
+import { PaginatedResult, ProductObject } from "@/interfaces";
 
 export const ProductListing = (props: ProductListingProps) => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -24,6 +26,7 @@ export const ProductListing = (props: ProductListingProps) => {
             key: "/images/banner-2.png",
             isPrimary: true,
           },
+          images: [],
         },
         {
           name: "Product Bsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
@@ -33,6 +36,7 @@ export const ProductListing = (props: ProductListingProps) => {
             key: "/images/banner-1.jpg",
             isPrimary: false,
           },
+          images: [],
         },
         {
           name: "Product B",
@@ -42,6 +46,7 @@ export const ProductListing = (props: ProductListingProps) => {
             key: "/images/banner-1.jpg",
             isPrimary: false,
           },
+          images: [],
         },
         {
           name: "Product B",
@@ -51,6 +56,7 @@ export const ProductListing = (props: ProductListingProps) => {
             key: "/images/banner-1.jpg",
             isPrimary: false,
           },
+          images: [],
         },
         {
           name: "Product B",
@@ -60,16 +66,16 @@ export const ProductListing = (props: ProductListingProps) => {
             key: "/images/banner-1.jpg",
             isPrimary: false,
           },
+          images: [],
         },
       ];
 
-      const res: any = await new Promise((resolve, _reject) => {
-        setTimeout(() => {
-          resolve(data);
-        }, 3000);
-      });
-      setProducts(res);
-      setHits(res.length);
+      const res = (await marketplacesApi.findProducts(
+        props.params
+      )) as PaginatedResult<ProductObject>;
+
+      setProducts([...res.records, ...data]);
+      setHits(res.count);
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {
