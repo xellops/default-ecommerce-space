@@ -2,7 +2,7 @@
 import { Adverts } from "@/components/Adverts/Adverts";
 import { WhiteCardContainer } from "@/components/Cards";
 import { Container } from "@/components/Container";
-import { Header } from "@/components/Header";
+import { Layout } from "@/components/Layout";
 import { ProductListing } from "@/components/ProductListing/ProductListing";
 import { Section } from "@/components/Section";
 import { Suspense } from "react";
@@ -11,11 +11,7 @@ export default function HomePage() {
   return (
     <main>
       <Suspense>
-        <div className="grid">
-          <Section>
-            <Header />
-          </Section>
-
+        <Layout className="grid">
           <Section>
             <Adverts />
           </Section>
@@ -37,7 +33,7 @@ export default function HomePage() {
               </WhiteCardContainer>
             </Container>
           </Section>
-        </div>
+        </Layout>
       </Suspense>
     </main>
   );

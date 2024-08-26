@@ -3,7 +3,7 @@ import { StoryBar } from "../Story";
 
 export const Header = () => {
   return (
-    <header>
+    <header className="mb-4">
       {/* <StoryBar /> */}
       <NavBar />
     </header>
