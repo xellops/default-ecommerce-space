@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "../Container";
 import { WhiteCardContainer } from "../Cards";
 import Image from "next/image";
+import { GalleryCarousel } from "../GalleryCarousel";
 
 export const Adverts = () => {
   const [adverts, setAdverts] = useState<any[]>([]);
@@ -9,7 +10,7 @@ export const Adverts = () => {
   const getData = async () => {
     const data = [
       { src: "/images/banner-2.png" },
-      // { src: "/images/banner-1.jpg" },
+      { src: "/images/banner-1.jpg" },
     ];
 
     setAdverts(data);
@@ -21,22 +22,22 @@ export const Adverts = () => {
 
   return (
     <Container>
-      <WhiteCardContainer>
-        <ul>
+      <div className="rounded-md overflow-hidden">
+        <GalleryCarousel startIndex={0} autoPlay>
           {adverts.map((ad, i) => (
-            <li
+            <div
               key={`advert-${i}`}
-              className="bg-blue-500 overflow-hidden rounded-xl h-48 md:h-80"
+              className="bg-blue-500 flex overflow-hidden rounded-xl h-[25svh] md:h-[35svh]"
             >
               <img
                 src={ad.src}
                 alt={ad.src}
-                className="object-bottom object-contain w-full"
+                className="object-[40%] object-cover w-full"
               />
-            </li>
+            </div>
           ))}
-        </ul>
-      </WhiteCardContainer>
+        </GalleryCarousel>
+      </div>
     </Container>
   );
 };

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Product } from "../Product/Product";
 import { ProductListingProps } from "@/interfaces/product-listing.interface";
-import { Section } from "../Section";
 import { Loader } from "../Loader/Loader";
 import { marketplacesApi } from "@/utils";
 import { PaginatedResult, ProductObject } from "@/interfaces";
@@ -17,64 +16,11 @@ export const ProductListing = (props: ProductListingProps) => {
     setLoading(true);
 
     try {
-      const data = [
-        {
-          name: "Product A",
-          slug: "product-a",
-          price: 30,
-          primaryImage: {
-            key: "/images/banner-2.png",
-            isPrimary: true,
-          },
-          images: [],
-        },
-        {
-          name: "Product Bsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
-          slug: "product-b",
-          price: 30,
-          primaryImage: {
-            key: "/images/banner-1.jpg",
-            isPrimary: false,
-          },
-          images: [],
-        },
-        {
-          name: "Product B",
-          slug: "product-b",
-          price: 30,
-          primaryImage: {
-            key: "/images/banner-1.jpg",
-            isPrimary: false,
-          },
-          images: [],
-        },
-        {
-          name: "Product B",
-          slug: "product-b",
-          price: 30,
-          primaryImage: {
-            key: "/images/banner-1.jpg",
-            isPrimary: false,
-          },
-          images: [],
-        },
-        {
-          name: "Product B",
-          slug: "product-b",
-          price: 30,
-          primaryImage: {
-            key: "/images/banner-1.jpg",
-            isPrimary: false,
-          },
-          images: [],
-        },
-      ];
-
       const res = (await marketplacesApi.findProducts(
         props.params
       )) as PaginatedResult<ProductObject>;
 
-      setProducts([...res.records, ...data]);
+      setProducts(res.records);
       setHits(res.count);
     } catch (error: any) {
       setErrorMessage(error.message);
@@ -105,7 +51,7 @@ export const ProductListing = (props: ProductListingProps) => {
               {props.showNumHits ? `(${hits} items found)` : null}
             </p>
           </div>
-          <ul className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <ul className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {products.map((product, i) => (
               <li key={`product-list-item-${Date.now()}-${i}`}>
                 <Product {...product} />
