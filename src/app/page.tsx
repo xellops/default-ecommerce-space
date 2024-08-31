@@ -1,5 +1,5 @@
 "use client";
-import { Adverts } from "@/components/Adverts/Adverts";
+import { Banners } from "@/components/Banners/Banners";
 import { WhiteCardContainer } from "@/components/Cards";
 import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
@@ -15,7 +15,7 @@ export default function HomePage() {
       <Suspense>
         <Layout className="grid">
           <Section>
-            <Adverts />
+            <Banners />
           </Section>
 
           <Section>

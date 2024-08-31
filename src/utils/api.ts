@@ -1,28 +1,18 @@
 import axios from "axios";
 import { cookies } from "./cookies";
 import {
-  AddSpecificationInput,
+  BannerObject,
   BrandObject,
   CategoryObject,
   CountryObject,
-  CreateBrandInput,
-  CreateCategoryInput,
-  CreateProductInput,
-  CreateSpaceInput,
-  CreateSpecificationGroupInput,
   CurrencyObject,
   IndustryObject,
   PaginatedResult,
   ProductImageObject,
   ProductObject,
-  ProductSpecificationInput,
   SpaceObject,
   SpecificationGroupObject,
-  SpecificationObject,
   TokenValidationResult,
-  UpdateBrandInput,
-  UpdateSpaceInput,
-  UpdateSpecificationGroupInput,
   WalletObject,
 } from "@/interfaces";
 import { auth } from "@/configs/firebase";
@@ -287,7 +277,6 @@ class MarketplacesAPI {
   }
 
   // ------ SPECIFICATION GROUP ------ //
-
   async findSpecificationGroups(
     spaceId: string,
     queryParams = {}
@@ -296,6 +285,20 @@ class MarketplacesAPI {
       const { data } = await axios.get(
         `${this.MARKETPLACES_API_BASE_URL}/specification-groups`,
         { headers: this.defaultHeaders, params: { ...queryParams, spaceId } }
+      );
+
+      return data.data;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  // ------ BANNERS ------ //
+  async findBanners(queryParams = {}): Promise<BannerObject[] | any> {
+    try {
+      const { data } = await axios.get(
+        `${this.MARKETPLACES_API_BASE_URL}/markets/banners`,
+        { headers: this.defaultHeaders, params: { ...queryParams } }
       );
 
       return data.data;
