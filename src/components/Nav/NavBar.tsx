@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IconContainer } from "../IconContainer/IconContainer";
-import { BiCart, BiHomeAlt, BiMenu, BiUser } from "react-icons/bi";
+import { BiCart, BiHomeAlt, BiMenu, BiSearch, BiUser } from "react-icons/bi";
 
 export const NavBar = () => {
   const [browserLocationUrl, setBrowserLocationUrl] = useState<string>("");
@@ -17,7 +17,11 @@ export const NavBar = () => {
   const { values, handleChange, handleBlur, handleSubmit } = useFormik({
     initialValues: { q: searchParams.get("q") || "" },
     onSubmit(data) {
-      window.location.assign(`${window.location.origin}/products?q=${data.q}`);
+      if (data.q) {
+        window.location.assign(
+          `${window.location.origin}/products?q=${data.q}`
+        );
+      }
     },
   });
 
@@ -53,15 +57,14 @@ export const NavBar = () => {
                     onBlur={handleBlur}
                     type="search"
                     placeholder="Search for absolutely anything - goods, services, brands, dealers, supply chains..."
-                    className="w-full max-w-screen-lg"
+                    className="w-full max-w-screen-lg focus:border-0"
                   />
-                  <Button
+                  <button
                     type="submit"
-                    className="hidden md:block absolute top-[50%] -translate-y-[50%] right-1"
-                    disabled={!values.q}
+                    className="bg-white p-1 md:block absolute top-[50%] -translate-y-[50%] right-1"
                   >
-                    SEARCH
-                  </Button>
+                    <BiSearch />
+                  </button>
                 </div>
               </FormField>
             </Form>

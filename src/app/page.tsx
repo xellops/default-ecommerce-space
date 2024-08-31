@@ -5,6 +5,8 @@ import { Container } from "@/components/Container";
 import { Layout } from "@/components/Layout";
 import { ProductListing } from "@/components/ProductListing/ProductListing";
 import { Section } from "@/components/Section";
+import { SectionHeading } from "@/components/SectionHeading";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export default function HomePage() {
@@ -19,7 +21,15 @@ export default function HomePage() {
           <Section>
             <Container>
               <WhiteCardContainer>
-                <h2 className="text-xl font-semibold">Top sales</h2>
+                <SectionHeading className="flex justify-between">
+                  <span>New Arrivals</span>
+                  <Link
+                    className="text-sm underline"
+                    href={"/products?collection="}
+                  >
+                    See all
+                  </Link>
+                </SectionHeading>
                 <ProductListing params={{}} />
               </WhiteCardContainer>
             </Container>
@@ -28,7 +38,40 @@ export default function HomePage() {
           <Section>
             <Container>
               <WhiteCardContainer>
-                <h2 className="text-xl font-semibold">Electronics</h2>
+                <ProductListing params={{}} />
+              </WhiteCardContainer>
+            </Container>
+          </Section>
+
+          <Section>
+            <Container>
+              <WhiteCardContainer>
+                <SectionHeading className="flex justify-between">
+                  <span>Electronics</span>
+                  <Link
+                    className="text-sm underline"
+                    href={"/products?collection="}
+                  >
+                    See all
+                  </Link>
+                </SectionHeading>
+                <ProductListing params={{}} />
+              </WhiteCardContainer>
+            </Container>
+          </Section>
+
+          <Section>
+            <Container>
+              <WhiteCardContainer>
+                <SectionHeading className="flex justify-between">
+                  <span>Kitchen Appliance</span>
+                  <Link
+                    className="text-sm underline"
+                    href={"/products?collection="}
+                  >
+                    See all
+                  </Link>
+                </SectionHeading>
                 <ProductListing params={{}} />
               </WhiteCardContainer>
             </Container>
