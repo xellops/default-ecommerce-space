@@ -97,7 +97,7 @@ export const ProductSummary = ({ product }: ProductSummaryProps) => {
               productId={product.id}
               availableUnits={product.availableUnits}
             />
-            <Button className="bg-green-600 uppercase">Buy Now</Button>
+            <Button className="uppercase">Buy Now</Button>
           </Section>
         </div>
       </div>

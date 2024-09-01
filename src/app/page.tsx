@@ -6,14 +6,29 @@ import { Layout } from "@/components/Layout";
 import { ProductListing } from "@/components/ProductListing/ProductListing";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
+import { useSpaceConfiguration } from "@/contexts";
 import Link from "next/link";
 import { Suspense } from "react";
 
 export default function HomePage() {
+  const { spaceConfiguration } = useSpaceConfiguration();
   return (
     <main>
       <Suspense>
         <Layout className="grid">
+          <Section>
+            <Container>
+              <h1 className="font-medium text-sm">
+                Welcome to{" "}
+                <span
+                  style={{ color: spaceConfiguration.brandColor }}
+                  className={`text-[${spaceConfiguration.brandColor}]`}
+                >
+                  {spaceConfiguration.name}
+                </span>
+              </h1>
+            </Container>
+          </Section>
           <Section>
             <Banners />
           </Section>

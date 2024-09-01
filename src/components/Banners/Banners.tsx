@@ -18,14 +18,14 @@ export const Banners = () => {
     getData();
   }, []);
 
-  return (
+  return banners.length ? (
     <Container>
       <div className="rounded-md overflow-hidden">
         <GalleryCarousel startIndex={0} autoPlay>
           {banners.map((banner, i) => (
             <div
               key={`banner-${i}`}
-              className="flex overflow-hidden rounded-xl h-[15svh] sm:h-[25svh] md:h-[30svh] bg-[#fff]"
+              className="flex overflow-hidden rounded-xl h-[15svh] sm:h-[25svh] md:h-[35svh] lg:h-[40svh] xl:h-[48svh] bg-[#fff]"
             >
               <Image
                 src={Storage.get(banner.imageKey)}
@@ -38,5 +38,5 @@ export const Banners = () => {
         </GalleryCarousel>
       </div>
     </Container>
-  );
+  ) : null;
 };

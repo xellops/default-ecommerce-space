@@ -1,14 +1,17 @@
 import { Section } from "../Section";
 import { CardContainer, WhiteCardContainer } from "../Cards";
 import { Container } from "../Container";
+import { useSpaceConfiguration } from "@/contexts";
 
 export const Footer = () => {
+  const { spaceConfiguration } = useSpaceConfiguration();
+
   return (
     <Section>
       <Section>
         <Container>
           <WhiteCardContainer>
-            <p>Some details about this space</p>
+            <p>{spaceConfiguration.description}</p>
           </WhiteCardContainer>
         </Container>
       </Section>

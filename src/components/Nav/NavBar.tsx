@@ -9,6 +9,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IconContainer } from "../IconContainer/IconContainer";
 import { BiCart, BiHomeAlt, BiMenu, BiSearch, BiUser } from "react-icons/bi";
+import { Logo } from "../Logo";
 
 export const NavBar = () => {
   const [browserLocationUrl, setBrowserLocationUrl] = useState<string>("");
@@ -34,11 +35,11 @@ export const NavBar = () => {
       <Container>
         <div className="flex items-center justify-between gap-2 sm:gap-4 md:gap-8">
           <div className="flex items-center gap-2">
-            <IconContainer className="cursor-pointer">
+            {/* <IconContainer className="cursor-pointer">
               <BiMenu />
-            </IconContainer>
+            </IconContainer> */}
             <Link href={"/"} className="logo font-medium flex">
-              <span className="hidden md:block">ZoneX</span>
+              <Logo />
 
               {/* <IconContainer className="md:hidden">
                 <BiHomeAlt />

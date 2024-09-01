@@ -32,6 +32,7 @@ class MarketplacesAPI {
 
   private readonly defaultHeaders = {
     authorization: `Bearer ${this.token}`,
+    "x-space-access-id": process.env.NEXT_PUBLIC_SPACE_ACCESS_ID,
   };
 
   handleError(error: any) {
@@ -164,6 +165,18 @@ class MarketplacesAPI {
   }
 
   // ------ SPACE ------ //
+  async findSpaceConfiguration(): Promise<SpaceObject | any> {
+    try {
+      const { data } = await axios.get(
+        `${this.MARKETPLACES_API_BASE_URL}/markets/space-configuration`,
+        { headers: this.defaultHeaders }
+      );
+
+      return data.data;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
 
   async findSpaces(
     queryParams = {}
