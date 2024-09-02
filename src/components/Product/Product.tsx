@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { ProductObject } from "@/interfaces";
 import { toast } from "react-toastify";
 import { CartButtonControls } from "../CartButtonControls/CartButtonControls";
+import Image from "next/image";
 
 export const Product = (props: ProductObject) => {
   const [isInCart, setIsInCart] = useState<boolean>(false);
@@ -47,7 +48,7 @@ export const Product = (props: ProductObject) => {
     >
       <div className="overflow-hidden relative flex">
         <Link href={props.slug}>
-          <img
+          <Image
             src={
               props.images[0]
                 ? Storage.get(props.images[0].key)
@@ -55,6 +56,7 @@ export const Product = (props: ProductObject) => {
             }
             alt={props.slug}
             className="object-cover absolute object-center w-full h-full"
+            fill={true}
           />
         </Link>
       </div>

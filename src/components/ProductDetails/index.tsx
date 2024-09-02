@@ -20,24 +20,25 @@ export const ProductDetails = () => {
   const [product, setProduct] = useState<ProductObject>();
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const fetchProduct = async () => {
-    setLoading(true);
-    try {
-      const data = await marketplacesApi.findProduct(
-        params.productSlug as string
-      );
-
-      setProduct(data);
-    } catch (error: any) {
-      setErrorMessage(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  
   useEffect(() => {
+    const fetchProduct = async () => {
+      setLoading(true);
+      try {
+        const data = await marketplacesApi.findProduct(
+          params.productSlug as string
+        );
+
+        setProduct(data);
+      } catch (error: any) {
+        setErrorMessage(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchProduct();
-  }, []);
+  }, [params.productSlug]);
 
   return loading ? (
     <Loader />
@@ -72,12 +73,12 @@ export const ProductDetails = () => {
 
                       <ul>
                         {product.specifications.map((productSpec, i) => (
-                          <li>
+                          <li key={`prod-spec-${productSpec.id}-${i}`}>
                             <p className="text-sm">
                               <span className="font-medium">
                                 {productSpec.metadata.name}:{" "}
                               </span>
-                              <span>{productSpec.value.raw}</span>
+                              <span>{productSpec.value?.raw}</span>
                             </p>
                           </li>
                         ))}

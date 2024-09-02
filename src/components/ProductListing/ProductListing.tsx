@@ -11,27 +11,28 @@ export const ProductListing = (props: ProductListingProps) => {
   const [products, setProducts] = useState<any[]>([]);
   const [hits, setHits] = useState<number>(0);
 
-  const getData = async () => {
-    setErrorMessage("");
-    setLoading(true);
-
-    try {
-      const res = (await marketplacesApi.findProducts(
-        props.params
-      )) as PaginatedResult<ProductObject>;
-
-      setProducts(res.records);
-      setHits(res.count);
-    } catch (error: any) {
-      setErrorMessage(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  
   useEffect(() => {
+    const getData = async () => {
+      setErrorMessage("");
+      setLoading(true);
+
+      try {
+        const res = (await marketplacesApi.findProducts(
+          props.params
+        )) as PaginatedResult<ProductObject>;
+
+        setProducts(res.records);
+        setHits(res.count);
+      } catch (error: any) {
+        setErrorMessage(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getData();
-  }, []);
+  }, [props.params]);
 
   if (loading) {
     return (

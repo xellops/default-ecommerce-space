@@ -2,7 +2,7 @@ import { SpaceObject } from "./space.interface";
 import {
   SpecificationGroupObject,
   SpecificationObject,
-} from "./banner.interface";
+} from "./specification-group.interface";
 
 export enum ProductClass {
   good = "good",
