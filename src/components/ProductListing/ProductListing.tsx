@@ -11,7 +11,6 @@ export const ProductListing = (props: ProductListingProps) => {
   const [products, setProducts] = useState<any[]>([]);
   const [hits, setHits] = useState<number>(0);
 
-  
   useEffect(() => {
     const getData = async () => {
       setErrorMessage("");
