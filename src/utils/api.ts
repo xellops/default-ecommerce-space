@@ -1,28 +1,18 @@
 import axios from "axios";
 import { cookies } from "./cookies";
 import {
-  AddSpecificationInput,
+  BannerObject,
   BrandObject,
   CategoryObject,
   CountryObject,
-  CreateBrandInput,
-  CreateCategoryInput,
-  CreateProductInput,
-  CreateSpaceInput,
-  CreateSpecificationGroupInput,
   CurrencyObject,
   IndustryObject,
   PaginatedResult,
   ProductImageObject,
   ProductObject,
-  ProductSpecificationInput,
   SpaceObject,
   SpecificationGroupObject,
-  SpecificationObject,
   TokenValidationResult,
-  UpdateBrandInput,
-  UpdateSpaceInput,
-  UpdateSpecificationGroupInput,
   WalletObject,
 } from "@/interfaces";
 import { auth } from "@/configs/firebase";
@@ -38,8 +28,11 @@ class MarketplacesAPI {
   private readonly MARKETPLACES_API_BASE_URL =
     process.env.NEXT_PUBLIC_MARKETPLACES_API_BASE_URL;
 
+  private readonly MARKETS_API_BASE_URL = `${process.env.NEXT_PUBLIC_MARKETPLACES_API_BASE_URL}/markets`;
+
   private readonly defaultHeaders = {
     authorization: `Bearer ${this.token}`,
+    "x-space-access-id": process.env.NEXT_PUBLIC_SPACE_ACCESS_ID,
   };
 
   handleError(error: any) {
@@ -172,12 +165,10 @@ class MarketplacesAPI {
   }
 
   // ------ SPACE ------ //
-
-  async createSpace(input: CreateSpaceInput): Promise<SpaceObject | any> {
+  async findSpaceConfiguration(): Promise<SpaceObject | any> {
     try {
-      const { data } = await axios.post(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces`,
-        input,
+      const { data } = await axios.get(
+        `${this.MARKETPLACES_API_BASE_URL}/markets/space-configuration`,
         { headers: this.defaultHeaders }
       );
 
@@ -215,41 +206,7 @@ class MarketplacesAPI {
     }
   }
 
-  async updateSpace(
-    id: string,
-    input: UpdateSpaceInput
-  ): Promise<SpaceObject | any> {
-    try {
-      const { data } = await axios.patch(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces/${id}`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
   // ------ SPACE BRAND ------ //
-
-  async createSpaceBrand(
-    spaceId: string,
-    input: CreateBrandInput
-  ): Promise<BrandObject | any> {
-    try {
-      const { data } = await axios.post(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces/${spaceId}/brands`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
 
   async findSpaceBrands(
     spaceId: string,
@@ -262,102 +219,6 @@ class MarketplacesAPI {
       );
 
       return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async updateSpaceBrand(
-    spaceId: string,
-    brandId: string,
-    input: UpdateBrandInput
-  ): Promise<BrandObject | any> {
-    try {
-      const { data } = await axios.patch(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces/${spaceId}/brands/${brandId}`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async deleteSpaceBrand(spaceId: string, brandId: string): Promise<void> {
-    try {
-      await axios.delete(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces/${spaceId}/brands/${brandId}`,
-        { headers: this.defaultHeaders }
-      );
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  // ------ SPACE CATEGORY ------ //
-
-  async createSpaceCategory(
-    spaceId: string,
-    input: CreateCategoryInput
-  ): Promise<CategoryObject | any> {
-    try {
-      const { data } = await axios.post(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces/${spaceId}/categories`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async findSpaceCategories(
-    spaceId: string,
-    queryParams = {}
-  ): Promise<PaginatedResult<CategoryObject> | any> {
-    try {
-      const { data } = await axios.get(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces/${spaceId}/categories`,
-        { headers: this.defaultHeaders, params: queryParams }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async updateSpaceCategory(
-    spaceId: string,
-    categoryId: string,
-    input: UpdateBrandInput
-  ): Promise<CategoryObject | any> {
-    try {
-      const { data } = await axios.patch(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces/${spaceId}/categories/${categoryId}`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async deleteSpaceCategory(
-    spaceId: string,
-    categoryId: string
-  ): Promise<void> {
-    try {
-      await axios.delete(
-        `${this.MARKETPLACES_API_BASE_URL}/spaces/${spaceId}/categories/${categoryId}`,
-        { headers: this.defaultHeaders }
-      );
     } catch (error) {
       this.handleError(error);
     }
@@ -383,28 +244,13 @@ class MarketplacesAPI {
 
   // ------ PRODUCT ------ //
 
-  async createProduct(input: CreateProductInput): Promise<ProductObject | any> {
-    try {
-      const { data } = await axios.post(
-        `${this.MARKETPLACES_API_BASE_URL}/products`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
   async findProducts(
-    spaceId: string,
     queryParams = {}
   ): Promise<PaginatedResult<ProductObject> | any> {
     try {
       const { data } = await axios.get(
-        `${this.MARKETPLACES_API_BASE_URL}/products`,
-        { headers: this.defaultHeaders, params: { ...queryParams, spaceId } }
+        `${this.MARKETS_API_BASE_URL}/products`,
+        { headers: this.defaultHeaders, params: queryParams }
       );
 
       return data.data;
@@ -413,83 +259,20 @@ class MarketplacesAPI {
     }
   }
 
-  async findProduct(productId: string): Promise<ProductObject | any> {
+  async findProduct(slug: string): Promise<ProductObject | any> {
     try {
       const { data } = await axios.get(
-        `${this.MARKETPLACES_API_BASE_URL}/products/${productId}`,
+        `${this.MARKETS_API_BASE_URL}/products/${slug}`,
         { headers: this.defaultHeaders }
       );
 
       return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async updateProduct(
-    productId: string,
-    input: UpdateBrandInput
-  ): Promise<ProductObject | any> {
-    try {
-      const { data } = await axios.patch(
-        `${this.MARKETPLACES_API_BASE_URL}/products/${productId}`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async deleteProduct(productId: string): Promise<void> {
-    try {
-      await axios.delete(
-        `${this.MARKETPLACES_API_BASE_URL}/products/${productId}`,
-        { headers: this.defaultHeaders }
-      );
     } catch (error) {
       this.handleError(error);
     }
   }
 
   // ------ PRODUCT IMAGES ------ //
-
-  async addProductImages(
-    productId: string,
-    input: any
-  ): Promise<ProductImageObject[] | any> {
-    try {
-      // const { data } = await axios.post(
-      //   `${this.MARKETPLACES_API_BASE_URL}/products/${productId}/images`,
-      //   input,
-      //   {
-      //     headers: {
-      //       ...this.defaultHeaders,
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   }
-      // );
-
-      const res = await fetch(
-        `${this.MARKETPLACES_API_BASE_URL}/products/${productId}/images`,
-        {
-          method: "post",
-          body: input,
-          headers: {
-            ...this.defaultHeaders,
-          },
-        }
-      );
-
-      const data = await res.json();
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
 
   async findProductImages(
     productId: string
@@ -506,72 +289,7 @@ class MarketplacesAPI {
     }
   }
 
-  async setPrimaryProductImage(
-    productId: string,
-    imageId: string
-  ): Promise<ProductImageObject | any> {
-    try {
-      const { data } = await axios.patch(
-        `${this.MARKETPLACES_API_BASE_URL}/products/${productId}/images/${imageId}/primary`,
-        null,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async deleteProductImage(productId: string, imageId: string): Promise<void> {
-    try {
-      await axios.delete(
-        `${this.MARKETPLACES_API_BASE_URL}/products/${productId}/images/${imageId}`,
-        { headers: this.defaultHeaders }
-      );
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  // ------ PRODUCT SPECIFICATION GROUP ------ //
-
-  async setProductSpecificationGroup(
-    productId: string,
-    specificationGroupId: string,
-    input: ProductSpecificationInput[] = []
-  ): Promise<ProductObject | any> {
-    try {
-      const { data } = await axios.put(
-        `${this.MARKETPLACES_API_BASE_URL}/products/${productId}/specification-group`,
-        { specificationGroupId, specifications: input },
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
   // ------ SPECIFICATION GROUP ------ //
-
-  async createSpecificationGroup(
-    input: CreateSpecificationGroupInput
-  ): Promise<SpecificationGroupObject | any> {
-    try {
-      const { data } = await axios.post(
-        `${this.MARKETPLACES_API_BASE_URL}/specification-groups`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
   async findSpecificationGroups(
     spaceId: string,
     queryParams = {}
@@ -588,93 +306,15 @@ class MarketplacesAPI {
     }
   }
 
-  async findSpecificationGroup(
-    specificationGroupId: string
-  ): Promise<SpecificationGroupObject | any> {
+  // ------ BANNERS ------ //
+  async findBanners(queryParams = {}): Promise<BannerObject[] | any> {
     try {
       const { data } = await axios.get(
-        `${this.MARKETPLACES_API_BASE_URL}/specification-groups/${specificationGroupId}`,
-        { headers: this.defaultHeaders }
+        `${this.MARKETPLACES_API_BASE_URL}/markets/banners`,
+        { headers: this.defaultHeaders, params: { ...queryParams } }
       );
 
       return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async updateSpecificationGroup(
-    specificationGroupId: string,
-    input: UpdateSpecificationGroupInput
-  ): Promise<SpecificationGroupObject | any> {
-    try {
-      const { data } = await axios.patch(
-        `${this.MARKETPLACES_API_BASE_URL}/specification-groups/${specificationGroupId}`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async deleteSpecificationGroup(specificationGroupId: string): Promise<void> {
-    try {
-      await axios.delete(
-        `${this.MARKETPLACES_API_BASE_URL}/specification-groups/${specificationGroupId}`,
-        { headers: this.defaultHeaders }
-      );
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async addSpecificationToGroup(
-    specificationGroupId: string,
-    input: AddSpecificationInput
-  ): Promise<SpecificationObject | any> {
-    try {
-      const { data } = await axios.post(
-        `${this.MARKETPLACES_API_BASE_URL}/specification-groups/${specificationGroupId}/specifications`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async updateSpecificationInGroup(
-    specificationGroupId: string,
-    specificationId: string,
-    input: UpdateBrandInput
-  ): Promise<SpecificationObject | any> {
-    try {
-      const { data } = await axios.patch(
-        `${this.MARKETPLACES_API_BASE_URL}/specification-groups/${specificationGroupId}/specifications/${specificationId}`,
-        input,
-        { headers: this.defaultHeaders }
-      );
-
-      return data.data;
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  async deleteSpecificationFromGroup(
-    specificationGroupId: string,
-    specificationId: string
-  ): Promise<void> {
-    try {
-      await axios.delete(
-        `${this.MARKETPLACES_API_BASE_URL}/specification-groups/${specificationGroupId}/specifications/${specificationId}`,
-        { headers: this.defaultHeaders }
-      );
     } catch (error) {
       this.handleError(error);
     }

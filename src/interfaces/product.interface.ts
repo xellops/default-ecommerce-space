@@ -29,6 +29,7 @@ export interface ProductObject {
   specificationGroup?: SpecificationGroupObject;
   specifications: ProductSpecificationObject[];
   primaryImage: ProductImageObject;
+  images: ProductImageObject[];
 }
 
 export interface CreateProductInput {

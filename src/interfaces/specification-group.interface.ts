@@ -21,6 +21,7 @@ export interface SpecificationObject {
 export interface SpecificationGroupObject {
   id: string;
   name: string;
+  slug: string;
   description: string;
   documentation?: string;
   visibility: SpecificationGroupVisibility;

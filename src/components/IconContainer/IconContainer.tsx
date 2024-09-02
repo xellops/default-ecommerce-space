@@ -6,7 +6,7 @@ export interface IconContainerProps extends HtmlHTMLAttributes<any> {
 
 export const IconContainer = (props: IconContainerProps) => {
   return (
-    <div {...props} className={`text-xl ${props.className || ""}`}>
+    <div {...props} className={`text-2xl md:text-3xl ${props.className || ""}`}>
       {props.children}
     </div>
   );

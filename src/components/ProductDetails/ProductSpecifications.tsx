@@ -18,23 +18,6 @@ export const ProductSpecifications = (props: ProductSpecificationsProps) => {
     setProductSpecificationInputWithMeta,
   ] = useState<ProductSpecificationInputWithMeta[]>([]);
 
-  const handleSubmit = async (prodSpecInputs: ProductSpecificationInput[]) => {
-    if (!updating) return;
-    setUpdating(true);
-    try {
-      await marketplacesApi.setProductSpecificationGroup(
-        props.productId,
-        props.group.id!,
-        prodSpecInputs
-      );
-
-      router.refresh();
-    } catch (error: any) {
-      toast.error(error.message);
-      setUpdating(false);
-    }
-  };
-
   useEffect(() => {
     const { group } = props;
     if (!group) return;

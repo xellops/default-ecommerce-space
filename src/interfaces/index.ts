@@ -8,6 +8,7 @@ export * from "./category.interface";
 export * from "./wallet.interface";
 export * from "./product.interface";
 export * from "./specification-group.interface";
+export * from "./banner.interface";
 
 export interface PaginatedResult<T> {
   count: number;
