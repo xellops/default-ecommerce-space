@@ -32,7 +32,7 @@ export const Button = (props: ButtonProp) => {
 
         color: btnVariant === "secondary" ? spaceConfiguration.brandColor : "",
       }}
-      className={`p-2 transition-all duration-200 hover:scale-95 shadow-xl text-sm rounded-md font-medium disabled:opacity-75 ${btnVariantStyling} ${props.className}`}
+      className={`p-2 transition-all duration-200 hover:scale-95 shadow-xl text-xs sm:text-sm rounded-md font-medium disabled:opacity-75 ${btnVariantStyling} ${props.className}`}
     >
       {props.children}
     </button>

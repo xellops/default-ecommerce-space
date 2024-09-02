@@ -44,7 +44,7 @@ export const Product = (props: ProductObject) => {
         display: "grid",
         gridTemplateRows: "3fr 2fr",
       }}
-      className="bg-white border rounded-md h-60 sm:h-72 overflow-hidden hover:shadow-md transition-all"
+      className="bg-white border rounded-md h-56 sm:h-72 overflow-hidden hover:shadow-md transition-all"
     >
       <div className="overflow-hidden relative flex">
         <Link href={props.slug}>
@@ -63,8 +63,10 @@ export const Product = (props: ProductObject) => {
 
       <div className="flex flex-col justify-between p-2 gap-2">
         <Link href={props.slug}>
-          <h3 className="text-sm mb-1">{Text.truncate(props.name, 32)}</h3>
-          <p className="text-sm font-medium">
+          <h3 className="text-xs sm:text-sm mb-1">
+            {Text.truncate(props.name, 32)}
+          </h3>
+          <p className="text-xs sm:text-sm font-semibold">
             {Numerics.format(props.price, { symbol: "NGN" })}
           </p>
         </Link>
