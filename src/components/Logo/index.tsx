@@ -7,7 +7,7 @@ export const Logo = () => {
 
   return (
     <div className="relative flex items-center gap-2">
-      {spaceConfiguration.logoImagePath ? (
+      {/* {spaceConfiguration.logoImagePath ? (
         <div className="flex h-12 sm:h-13">
           <Image
             src={Storage.get(spaceConfiguration.logoImagePath)}
@@ -17,16 +17,19 @@ export const Logo = () => {
             className="w-full object-contain"
           />
         </div>
-      ) : null}
+      ) : null} */}
 
       <div
-        className="font-semibold hidden sm:block text-lg"
-        style={{ color: spaceConfiguration.brandColor }}
+        className="font-semibold  text-md"
+        style={{
+          color: spaceConfiguration.brandColor,
+          lineHeight: 0.85,
+        }}
       >
         {spaceConfiguration.name.length > 14 ? (
           <div>{Text.getInitials(spaceConfiguration.name)}</div>
         ) : (
-          spaceConfiguration.name
+          <div>{spaceConfiguration.name}</div>
         )}
       </div>
     </div>

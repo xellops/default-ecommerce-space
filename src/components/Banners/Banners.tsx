@@ -25,7 +25,7 @@ export const Banners = () => {
           {banners.map((banner, i) => (
             <div
               key={`banner-${i}`}
-              className="flex overflow-hidden rounded-xl h-[20svh] sm:h-[25svh] md:h-[35svh] lg:h-[40svh] xl:h-[48svh] bg-[#fff]"
+              className="flex overflow-hidden rounded-xl h-[23svh] sm:h-[30svh] md:h-[35svh] lg:h-[40svh] xl:h-[48svh] bg-[#fff]"
             >
               <Image
                 src={Storage.get(banner.imageKey)}
